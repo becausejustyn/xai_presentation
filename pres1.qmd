@@ -1,0 +1,199 @@
+---
+title: "Presentation"
+editor: visual
+author: "Justyn Rodrigues"
+suppress-bibliography: false
+format:
+  revealjs:
+    bibliography: references.bib
+    smaller: false
+    scrollable: true
+    mermaid: 
+      theme: forest
+slide-number: true
+---
+
+# Title
+
+```{r}
+current_times <- c(30, 30, 30, 30, 30, 30, 30, 30, 60)
+transform(
+  data.frame(
+  section = rep(c('Intro', 'Methodology', 'Discussion', 'Conclusion'), times = c(3, 3, 2, 1)),
+  subsection = c('Framing the Problem', 'What is XAI?', 'Challenges', 'Study Overview', 'Study Tasks', 'Participants', 'Findings', 'Results Discussion', 'Conclusion'),
+  time_seconds = current_times, running_total_minutes = cumsum(current_times / 60)
+  ))
+
+data.frame(
+  section = c('Intro', 'Methodology', 'Discussion', 'Conclusion'),
+  ideal_range = c('2 -3', '2 - 3', '3 - 4', '1 - 2'),
+  running_time_low = cumsum(c(2, 2, 3, 1)), 
+  running_time_high = cumsum(c(3, 3, 4, 2))
+  )
+```
+
+## Framing the Problem
+
+### Introduction
+
+- Sentence about AI popularity rising 📈, increasing its usage 🚀, thus a higher emphasis on needing to understand how it works
+- Particularly, we want to address 
+  - how do we know we can trust AI?
+  - how do we know if the model is doing what we want?
+  - how can we evaluate if the model is fair? 
+
+### What is XAI?
+
+- To address this, eXplainable Artificial Intelligence (XAI) has become a key research focus.
+- The general idea is that XAI should ideally help humans understand or see into the blackbox of AI
+- While it may sound simple there are many key challenges with XAI
+  - what is an explanation?
+  - is XAI helpful?
+  - how do we know we can trust XAI?
+  - its name by definition is vague and creates confusion
+  - what type of XAI is best?
+
+## Types of XAI I
+
+```{mermaid}
+%%| fig-height: 6
+flowchart LR
+    A(XAI Methods)
+    B(Post-hoc Explanations)
+    C(Transparency)
+    C1(Algorithmic Transparency)
+    C2(Decomposability)
+    C3(Simulatability)
+    A1(Backpropagation-based)
+    A2(Perturbation-based)
+    A3A(Global)
+    A3B(Local)
+
+    A --> B & C
+    C --> C1 & C2 & C3
+    B --> A3A & A3B
+    subgraph We are here
+    A3B --> A1 & A2
+    end
+```
+
+## Types of XAI I
+
+In short, we can understand the types of XAI as
+
+- Transparency: understanding the methodological aspects
+- Post-hoc Explanations: have a model show you what it believes is important for its decision
+  - global: the entire model
+  - local: single instance
+
+
+## XAI Challenges and Limitations
+
+- How long to provide context, etc. for XAI prior covering the user study
+
+## Misc
+
+XAI Characteristics
+
+- When [@lipton2018mythos]
+  - Post-hoc: get explanation from the outcome (what part of input is responsible)
+- Model type
+- Explanation level [@molnar2022]
+  - model specific: specific to a models architecture
+  - model agnostic: can be used on any model
+  - global: the entire model
+     - Sheds light on the big picture biases affecting larger subgroups
+     - Is the model at a high level ready for deployment?
+  - local: single prediction
+     - Uncover biases in the local neighbourhood of a given instance
+     - Are predictions being made for the right reasons
+- Visualisation type
+  - Occlusion or perturbation-based: Methods like SHAP and LIME [@ribeiro2016should] cover a small area of the image with a black or grey square, then calculate the impact this has on the model prediction.
+  - Saliency maps: Highlight the area of the input that is most relevant for the model output.
+     - Gradient-based (Sensitivity) [@konate2021comparison]
+     - Signal methods [@kindermans2019reliability]
+     - Attribution methods
+  - Prototypes
+
+## Misc II
+
+Still need to cover limitations so I can show why my study is needed lol.
+
+- Faithfulness
+  - Do explanations change when prediction changes? e.g. [@adebayo2018sanity]
+  - some explanation methods do not 'reflect' the underlying model.
+- Stability
+  - slight changes to inputs can cause large changes in explanations.
+  - explanations can be sensetive to hyperparameters [@bansal2020sam]
+- Fragility
+  - Do explanations change under distribution shift? e.g. [@kindermans2019reliability]
+  - post-hoc explanations can be easily manipulated.
+  - explanations can be easy to manipulate, e.g. [@dombrowski2019explanations], however, the prediction did not change
+- Evaluation
+  - It is tough to assess when there is no groundtruth. 
+  - The evaluation is mostly qualitative. 
+  - If we knew what was important to the model then we would not need an explanation.
+  - Are explanations better than random guess? [@hooker2019benchmark]
+     - popular explainability methods were no better than random designation of feature importance 
+
+## Misc III
+
+Post-hoc XAI are fragile.
+
+- many gradient based XAI are instable
+- perturbation methods can be easily manipulated (check report for citation?)
+- explanations can be easy to manipulate, e.g. [@dombrowski2019explanations], however, the prediction did not change 
+- [@kindermans2019reliability] showed that attribution methods result in limited reliability for input variation.
+- [@ghorbani2019interpretation] showed that introducing small (adversarial) perturbations to an image, can result in the same model prediction while showing different pixels being highlighted as explanations.
+
+## Misc IV
+
+- Unfortunately, the human tendency is to ascribe a positive interpretation: we assume that the feature we would find important is the one that was used (this is an example of a famously harmful cognitive error called confirmation bias).
+- Moreover, [@Gu2019NeuralNM] showed that common visual explanations remain unchanged even when precise modifications are made to the input that substantially alter the model’s predictions (a process known as an adversarial attack), even when those attacks lead to incorrect model predictions. 
+- As with heat maps, the human tendency is to assume that a model has used words in the same way we would.
+- All of these examples reveal another major challenge: explanations have no performance guarantees.
+- As such, using post-hoc explanations to assess the quality of model decisions adds an additional source of error—not only can the model be right or wrong, but so can the explanation.
+- An explanation does not show how the model arrived at the decision. For example, in CV it will show you the area that it thinks is important for the decision, but how do we assess if it was reasonable for it to be looking in that specific location?
+
+## Rough Outline
+
+- Introduction
+- Background on XAI
+- Methodology 
+- Results and Discussion
+- Conclusion
+
+## Random Stuff
+
+::: columns
+::: {.column width="40%"}
+
+- Faithfulness
+- Stability
+- Fragility
+- [Evaluation]{style="font-weight:bold;background-color:#ccddeb;"}
+:::
+
+::: {.column width="60%"}
+::: {.fragment fragment-index="2"}
+::: in-out
+- It is tough to assess when there is no groundtruth. 
+- The evaluation is mostly qualitative.  
+- If we knew what was important to the model then we would not need an explanation.
+:::
+:::
+
+::: {.fragment fragment-index="3"}
+::: {.in-out} 
+- Are explanations better than random guess? [@hooker2019benchmark]
+  - popular explainability methods were no better than random designation of feature importance 
+:::
+:::
+:::
+:::
+
+
+## References
+
+::: {#refs}
+:::
