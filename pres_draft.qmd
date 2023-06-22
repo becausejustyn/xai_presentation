@@ -358,11 +358,15 @@ Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 
 
 ------------------------------------------------------------------------
 
-## Results II
+## Strengths/Weakness of Study
 
--   posthoc?
--   strengths and weaknesses of the study
--   unexpected or interesting observations?
+- rename this title
+
+---
+
+## Unexpected or Interesting Observations?
+
+-   hi
 
 ------------------------------------------------------------------------
 
