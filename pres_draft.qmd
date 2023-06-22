@@ -134,13 +134,6 @@ Note about labels in computer vision and impact it can have?
 
 ------------------------------------------------------------------------
 
-### Tasks and Materials
-
--   Mention how you used yaw position and skin tone for creating different datasets, then during those slides you talk about it without text on those slides?
--   XAI used? where should that go
-
-------------------------------------------------------------------------
-
 ### Yaw Position
 
 -   Categories were created based on the yaw direction.
@@ -179,11 +172,15 @@ yaw_labels |>
 </figure>
 :::
 
+::: notes
+Note about the influence yaw has, e.g. CV recognises looking to the side as a different item.
+:::
+
 ------------------------------------------------------------------------
 
 ### Skin Tone
 
--   Similarly, to categorise skin tone, the Fitzpatrick classification system was used [@fitzpatrick1988validity], where the middle group was removed to make it slightly more clear.
+-   Similarly, to categorise skin tone, the Fitzpatrick classification system [@fitzpatrick1988validity] was used, where the middle group was removed to make it slightly more clear.
 
 ```{r}
 skin_tone_labels <- data.frame(
@@ -226,10 +223,8 @@ skin_tone_labels |>
 
 ### Creating Groups
 
--   Then using skin tone and yaw position, three models were trained using a different proportion of labels.
--   The two undersampled groups had the number for both skin labels balanced, so the difference could not be attributed simply due to sample size difference
--   For all conditions the sex and proportion of skin tones of the rendered human id was balanced
--   Mention the model architecture, they were pretrained, etc. and that you used a cropping model too and resized the images
+-   Then using *skin tone* and *yaw position*, three models were trained using a different proportion of labels.
+-   For all three datasets/models there was the same proportion of sex and skin tone, what differed was the direction the human was looking at.
 
 ```{r}
 data.frame(
@@ -247,11 +242,15 @@ data.frame(
   )
 ```
 
+::: notes
+Images were resizes from 1024 x 1024 to 256 x 256, cropping and architecture?
+:::
+
 ------------------------------------------------------------------------
 
 ### Experiment Conditions
 
--   Now that we have these three models, we will provide a user with an input image, the predicted person, then an explanation from two difference models, asking the user to select which XAI they find to be more reasonable.
+-   The user was provided with an **input image**, the **predicted person**, and an explanation from two difference models, asking the user to select which XAI they find to be more reasonable.
 -   Every participant will experience the condition made up of the Light and Dark undersampled groups, with the second condition they experience being randomly assigned.
 -   The order of the trials within a block is randomised, and the position of the model is counterbalanced, e.g. for the model that everybody experiences, half will see the Dark Undersampled model as `Model 1`, any the other half will see it as `Model 2`. Likewise, the order of the blocks is counterbalanced, e.g. which condition they experience first.
 
@@ -279,22 +278,14 @@ exp_cond |>
 
 ------------------------------------------------------------------------
 
-### Evaluating the Task?
-
--   how you evaluated the tasks of the participants (might be where you talk about the IV)
-
-------------------------------------------------------------------------
-
 ### Participant Info
 
--   Made the study available to participants from either Australia, United States, or United Kingdom. (mention why?)
--   The original sample was 50, but used 10 for a pilot prior running the study.
--   Staggered out the study to try and get a balance between the countries and types of people.
--   Countries:
+-   Made the study available to participants from either Australia, United States, or United Kingdom.
+-   Prior running the experiment, a pilot study of 10 participants was used.
+-   The sample size for the experiment was 40, broken down from the following countries:
     -   Australia 7
     -   United Kingdom 23
     -   United States 10
-    -   pilot: US 4, Aus 3, UK 3
 
 ```{r}
 part_demo <- data.frame(
@@ -321,21 +312,16 @@ part_demo |>
 
 ![Example Trial](images/xai_study_example.png){width="99%"}
 
-------------------------------------------------------------------------
-
-### Example Trial II
-
--   Hi
-
-::: {style="display: flex; justify-content: center;"}
-![Example Trial](images/xai_study_example.png){alt="Example Trial" fig-align="center" width="60%"}
+::: notes
+Explain how XAI works using this example.\
+Explain the task.
 :::
 
 ------------------------------------------------------------------------
 
 ### Selected Model
 
--   The Dark Undersampled model was the most selected model as the most reasonable
+-   The Dark Undersampled model was the most selected model as the most reasonable.
 -   Likewise, the balanced model was selected the least frequently as the most reasonable model
 
 ```{r}
@@ -362,7 +348,13 @@ selected_model |>
 
 ### Selected Model by Confidence
 
-::: ![Selected Model by Confidence](images/selected_model_by_confidence.png){width="90%"; fig-align="center"} :::
+::: {style="display: flex; justify-content: center;"}
+![](images/selected_model_by_confidence.png){alt="Selected Model by Confidence" fig-align="center" width="70%"}
+:::
+
+::: notes
+Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 3 and 4 were lower than the other two
+:::
 
 ------------------------------------------------------------------------
 
