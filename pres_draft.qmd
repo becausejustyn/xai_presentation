@@ -18,53 +18,31 @@ slide-number: c # true
 library(gt)
 ```
 
-## Introduction
+## What is the problem?
 
-To do list
-
-- issues with ambiguity/terms used so you can use the hotdog example
-- challenge of subjective vs objective measures in user studies?
-- user study count?
-- misc notes
-   - Occlusion or perturbation-based: Methods like SHAP and LIME [@ribeiro2016should] cover a small area of the image with a black or grey square, then calculate the impact this has on the model prediction.
-   - Saliency maps: Highlight the area of the input that is most relevant for the model output.
-- sort through the challenges 
-- Processing of Data (how labels/models were created)
-- Training the model (mention it was pretrained)
-- User study experiment, e.g. task, conditions
-- how we are evaluating it?
-- specific techniques used? e.g. LRP?
-
----
-
-### What is the problem?
-
--   Sentence about AI popularity rising 📈, increasing its usage 🚀, thus a higher emphasis on needing to understand how it works
+-   Artifical intelligence (AI) can be compared to a blackbox, in that we do not really understand what is happening under the hood.
+-   As AI continues to grow in popularity, the need to understand how decisions are made increase.
 -   Particularly, we want to address
     -   how do we know we can trust AI?
     -   how do we know if the model is doing what we want?
     -   how can we evaluate if the model is fair?
 
----
+------------------------------------------------------------------------
 
-### What is XAI?
+## What is XAI?
 
 -   To address this, eXplainable Artificial Intelligence (XAI) has become a key research focus.
--   The general idea is that XAI should ideally help humans understand or see into the blackbox of AI
--   While it may sound simple there are many key challenges with XAI
+-   The general idea is that XAI should ideally help humans understand or see into the blackbox of AI.
+-   While it may sound simple there are many key challenges with XAI:
     -   what is an explanation?
     -   is interpretability the same as explainability?
     -   can we trust explanations?
     -   are explanations helpful?
     -   what type of XAI is best?
 
-::: aside
-its name by definition is vague and creates confusion
-:::
+------------------------------------------------------------------------
 
----
-
-### Types of XAI
+## Types of XAI
 
 ```{mermaid}
 %%| fig-height: 6
@@ -88,82 +66,124 @@ flowchart LR
     end
 ```
 
-::: {.notes}
-Transparency: understanding the methodological aspects.  
-Post-hoc Explanations: have a model show you what it believes is important for its decision.  
-global: the entire model; Sheds light on the big picture biases affecting larger subgroups
-local: single prediction; Are predictions being made for the right reasons
+::: notes
+Transparency: understanding the methodological aspects.\
+Post-hoc Explanations: have a model show you what it believes is important for its decision.\
+global: the entire model; Sheds light on the big picture biases affecting larger subgroups local: single prediction; Are predictions being made for the right reasons\
+Occlusion or perturbation-based: cover a small area of the image with a black or grey square, then calculate the impact this has on the model prediction.\
+Saliency maps: Highlight the area of the input that is most relevant for the model output.
 :::
 
----
+------------------------------------------------------------------------
 
-### XAI Challenges I
+## XAI Challenges I: technique limitations
 
-- A key challenge is that terms such as interpretable, explainable, transparent, etc. have no consensus. Specifically, some authors will use these terms interchangeably [@molnar2022; @lipton2018mythos], where other authors will use different meanings for these [@Rudin2018StopEB]. 
-- Even when authors explicitly state the definition they are referring to, this is still an issue. To illustrate, for the rest of this presentation when I talk about a sandwich, I am referring to a hotdog.
+-   Adversarial attacks have shown that:
 
----
+    -   XAI methods can remain the same even when the prediction changes [@Gu2019NeuralNM]
 
-### XAI Challenges II
+    -   saliency maps can change without the prediction changing [@ghorbani2019interpretation]
 
-- this is to show why the study is needed
-- perturbation methods can be easily manipulated (check report for citation?)
-- explanations can be easy to manipulate, e.g. [@dombrowski2019explanations], however, the prediction did not change
-- [@ghorbani2019interpretation] showed that introducing small (adversarial) perturbations to an image, can result in the same model prediction while showing different pixels being highlighted as explanations.
+-   Post-hoc explanations can be easily manipulated e.g. [@dombrowski2019explanations], as well as can be sensetive to hyperparameters [@bansal2020sam].
 
----
-
-### XAI Challenges III
-
-- this can be more focused on the human side 
-- include the number of user studies, and also the point about ambiguity of definitions
--   Unfortunately, the human tendency is to ascribe a positive interpretation: we assume that the feature we would find important is the one that was used (this is an example of a famously harmful cognitive error called confirmation bias).
--   Moreover, [@Gu2019NeuralNM] showed that common visual explanations remain unchanged even when precise modifications are made to the input that substantially alter the model's predictions (a process known as an adversarial attack), even when those attacks lead to incorrect model predictions.
--   As with heat maps, the human tendency is to assume that a model has used words in the same way we would.
--   All of these examples reveal another major challenge: explanations have no performance guarantees.
--   As such, using post-hoc explanations to assess the quality of model decisions adds an additional source of error---not only can the model be right or wrong, but so can the explanation.
-
----
-
-### XAI Challenges IV
-
--   Do explanations change when prediction changes? e.g. [@adebayo2018sanity]
-    -   some explanation methods do not 'reflect' the underlying model.
--   slight changes to inputs can cause large changes in explanations.
-    -   explanations can be sensetive to hyperparameters [@bansal2020sam]
--   Do explanations change under distribution shift? e.g. [@kindermans2019reliability]
-    -   post-hoc explanations can be easily manipulated.
-    -   explanations can be easy to manipulate, e.g. [@dombrowski2019explanations], however, the prediction did not change
 -   How can we evaluate XAI?
-    -   It is tough to assess when there is no groundtruth.
-    -   The evaluation is mostly qualitative.
+
+    -   Its subjective nature means there is no groundtruth.
     -   If we knew what was important to the model then we would not need an explanation.
-    
-::: aside
-this might go earlier? or adjust before when you show some XAI questions
+    -   Just like the model can be wrong, so can the explanation.
+
+::: notes
+Adversarial attacks: Deliberate modifications to input data to deceive machine learning models, that are not noticable to humans.
 :::
 
----
+------------------------------------------------------------------------
 
-### XAI Challenges V: User Studies
+## XAI Challenges II: human focused
 
-- Despite the attention that XAI has received, there still remains a signifcant limitation in the literature: user studies. 
-- [-@adadi2018peeking] reported that only 5% of XAI publications are user studies.
-- While this is low, it has been estimated to be closer to 1% [@keane2019case], with many of the available user studies on XAI not reporting statistical analysis.
-- maybe mention that this might be because it is a hard problem?
+-   A key challenge is that terms such as interpretable, explainable, transparent, etc. have no consensus. Specifically, some authors will use these terms interchangeably [@molnar2022; @lipton2018mythos], where other authors will use different meanings for these [@Rudin2018StopEB].
+-   Even when authors explicitly state the definition they are referring to, this is still an issue. To illustrate, for the rest of this presentation when I talk about a sandwich, I am referring to a hotdog.
+-   Similarly, the general purpose of XAI is to help human users better understand non human features. Many limitations have occured from not considering the human element. Such as
+    -   humans tend to give positive interpretation; we assume that the feature we would find important is the one that was used (confirmation bias)
 
----
+------------------------------------------------------------------------
 
-## Methodology
+## XAI Challenges III: User Studies
 
-### Introduce the study
+-   Despite the attention that XAI has received, there still remains a signifcant limitation in the literature; user studies.
+    -   @adadi2018peeking reported that only 5% of XAI publications are user studies.
+
+    -   While this is low, it has been estimated to be closer to 1% [@keane2019case], with many of the available user studies on XAI not reporting statistical analysis.
+-   maybe mention that this might be because it is a hard problem?
+-   this is where challenge of subjective vs objective measures in user studies can go?
+
+------------------------------------------------------------------------
+
+### User Study
+
+-   A user study was ran on Prolific [^1] to explore if post-hoc explanations help humans recognise when a face recognition model is biased.
+-   The Diverse Human Faces dataset by Synthesis AI [@diversehumanfacesdataset] was used over real faces to ensure labels were correct for features such as skin tone, yaw direction, lighting, among other things.
+-   Synthetic data in face recognition models has been explored
+    -   Only using synthetic data can compete with some benchmarks [@wood2021fake].
+    -   Synthetic data can be used to balance out a dataset of real faces when there is not a balance of the different groups, such as direction, lighting, background, etc. [@kortylewski2019analyzing].
+
+[^1]: https://www.prolific.co/
+
+::: notes
+Note about labels in computer vision and impact it can have?
+:::
+
+------------------------------------------------------------------------
+
 ### Tasks and Materials
 
-- task?
+-   Mention how you used yaw position and skin tone for creating different datasets, then during those slides you talk about it without text on those slides?
+-   XAI used? where should that go
 
-#### Skin Tone
+------------------------------------------------------------------------
 
--   To categorise skin tone, the Fitzpatrick classification system was used [@fitzpatrick1988validity], where the middle group was removed to make it slightly more clear.
+### Yaw Position
+
+-   Categories were created based on the yaw direction.
+
+```{r}
+yaw_labels <- data.frame(
+  Label = c('Middle', 'Side', 'Vacant'), 
+  `Yaw Range(s)` = c('-4˚ to 4˚', '-15˚ to -7˚, 7˚ to 15˚', '-7˚ to -4˚, 4˚ to 7˚'), 
+  n = c(2650, 5334, 2016), 
+  Prop = c(0.265, 0.533, 0.202)
+)
+
+yaw_labels |>
+  gt() |>
+  tab_source_note(source_note = "Note: Side and vacant yaw ranges include two different ranges.") |>
+  cols_label(Yaw.Range.s. = 'Yaw Range(s)') |>
+  tab_header(title = 'Yaw Direction Labels') |>
+  cols_width(Yaw.Range.s. ~ px(150))
+```
+
+::: {style="display: flex; justify-content: center;"}
+<figure>
+
+<img src="images/6899.cam_default.f_1.rgb.png" alt="Middle Yaw" style="width: 70%;"/>
+
+<figcaption>Middle Yaw</figcaption>
+
+</figure>
+
+<figure>
+
+<img src="images/6805.cam_default.f_1.rgb.png" alt="Side Yaw" style="width: 70%;"/>
+
+<figcaption>Side Yaw</figcaption>
+
+</figure>
+:::
+
+------------------------------------------------------------------------
+
+### Skin Tone
+
+-   Similarly, to categorise skin tone, the Fitzpatrick classification system was used [@fitzpatrick1988validity], where the middle group was removed to make it slightly more clear.
 
 ```{r}
 skin_tone_labels <- data.frame(
@@ -184,41 +204,32 @@ skin_tone_labels |>
   cols_align(columns = c(Rounded.Values, n, Prop), align = 'left')
 ```
 
----
+::: {style="display: flex; justify-content: center;"}
+<figure>
 
-#### Yaw Position
+<img src="images/input_human_6814.png" alt="Light Skin Tone" style="width: 70%;"/>
 
--   Similarly, yaw directions between middle and side were removed.
+<figcaption>Light Skin Tone</figcaption>
 
-```{r}
-yaw_labels <- data.frame(
-  Label = c('Middle', 'Side', 'Vacant'), 
-  `Yaw Range(s)` = c('-4˚ to 4˚', '-15˚ to -7˚, 7˚ to 15˚', '-7˚ to -4˚, 4˚ to 7˚'), 
-  n = c(2650, 5334, 2016), 
-  Prop = c(0.265, 0.533, 0.202)
-)
+</figure>
 
-yaw_labels |>
-  gt() |>
-  tab_source_note(source_note = "Note: Side and vacant yaw ranges include two different ranges.") |>
-  cols_label(Yaw.Range.s. = 'Yaw Range(s)') |>
-  tab_header(title = 'Yaw Direction Labels') |>
-  cols_width(Yaw.Range.s. ~ px(150))
-```
+<figure>
 
-::: {layout-ncol="2" style="display: flex; justify-content: center;"}
-![Middle Yaw](images/6899.cam_default.f_1.rgb.png){width="50%"}
+<img src="images/input_human_9277.png" alt="Dark Skin Tone" style="width: 70%;"/>
 
-![Side Yaw](images/6805.cam_default.f_1.rgb.png){width="50%"}
+<figcaption>Dark Skin Tone</figcaption>
+
+</figure>
 :::
 
----
+------------------------------------------------------------------------
 
-#### Creating Groups
+### Creating Groups
 
 -   Then using skin tone and yaw position, three models were trained using a different proportion of labels.
 -   The two undersampled groups had the number for both skin labels balanced, so the difference could not be attributed simply due to sample size difference
--   For all conditions the sex of the rendered human id was balanced
+-   For all conditions the sex and proportion of skin tones of the rendered human id was balanced
+-   Mention the model architecture, they were pretrained, etc. and that you used a cropping model too and resized the images
 
 ```{r}
 data.frame(
@@ -236,9 +247,9 @@ data.frame(
   )
 ```
 
----
+------------------------------------------------------------------------
 
-#### Experiment Conditions
+### Experiment Conditions
 
 -   Now that we have these three models, we will provide a user with an input image, the predicted person, then an explanation from two difference models, asking the user to select which XAI they find to be more reasonable.
 -   Every participant will experience the condition made up of the Light and Dark undersampled groups, with the second condition they experience being randomly assigned.
@@ -266,7 +277,13 @@ exp_cond |>
     )
 ```
 
----
+------------------------------------------------------------------------
+
+### Evaluating the Task?
+
+-   how you evaluated the tasks of the participants (might be where you talk about the IV)
+
+------------------------------------------------------------------------
 
 ### Participant Info
 
@@ -277,6 +294,7 @@ exp_cond |>
     -   Australia 7
     -   United Kingdom 23
     -   United States 10
+    -   pilot: US 4, Aus 3, UK 3
 
 ```{r}
 part_demo <- data.frame(
@@ -294,9 +312,26 @@ part_demo |>
   cols_width(everything() ~ px(105))
 ```
 
----
+------------------------------------------------------------------------
 
-## Results/Discussion
+### Example Trial
+
+-   explain how XAI works using the example image as an example
+-   explain the task
+
+![Example Trial](images/xai_study_example.png){width="99%"}
+
+------------------------------------------------------------------------
+
+### Example Trial II
+
+-   Hi
+
+::: {style="display: flex; justify-content: center;"}
+![Example Trial](images/xai_study_example.png){alt="Example Trial" fig-align="center" width="60%"}
+:::
+
+------------------------------------------------------------------------
 
 ### Selected Model
 
@@ -323,9 +358,29 @@ selected_model |>
   )
 ```
 
+------------------------------------------------------------------------
 
----
+### Selected Model by Confidence
+
+::: ![Selected Model by Confidence](images/selected_model_by_confidence.png){width="90%"; fig-align="center"} :::
+
+------------------------------------------------------------------------
+
+## Results II
+
+-   posthoc?
+-   strengths and weaknesses of the study
+-   unexpected or interesting observations?
+
+------------------------------------------------------------------------
 
 ## Conclusion
 
-### visualise sandwich, then ask what sauce they saw on their hotdog? 
+-   main points
+-   contributions/signifcance of study
+-   future research directions
+-   visualise sandwich, then ask what sauce they saw on their hotdog?
+
+------------------------------------------------------------------------
+
+## References
