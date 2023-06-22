@@ -61,7 +61,7 @@ flowchart LR
     A --> B & C
     C --> C1 & C2 & C3
     B --> A3A & A3B
-    subgraph We are here
+    subgraph Scope for today
     A3B --> A1 & A2
     end
 ```
@@ -76,7 +76,7 @@ Saliency maps: Highlight the area of the input that is most relevant for the mod
 
 ------------------------------------------------------------------------
 
-## XAI Challenges I: technique limitations
+## XAI Challenges I
 
 -   Adversarial attacks have shown that:
 
@@ -93,28 +93,39 @@ Saliency maps: Highlight the area of the input that is most relevant for the mod
     -   Just like the model can be wrong, so can the explanation.
 
 ::: notes
-Adversarial attacks: Deliberate modifications to input data to deceive machine learning models, that are not noticable to humans.
+Adversarial attacks: Deliberate modifications to input data to deceive machine learning models, that are not noticable to humans. technique limitations
 :::
 
 ------------------------------------------------------------------------
 
-## XAI Challenges II: human focused
+## XAI Challenges II
 
 -   A key challenge is that terms such as interpretable, explainable, transparent, etc. have no consensus. Specifically, some authors will use these terms interchangeably [@molnar2022; @lipton2018mythos], where other authors will use different meanings for these [@Rudin2018StopEB].
--   Even when authors explicitly state the definition they are referring to, this is still an issue. To illustrate, for the rest of this presentation when I talk about a sandwich, I am referring to a hotdog.
--   Similarly, the general purpose of XAI is to help human users better understand non human features. Many limitations have occured from not considering the human element. Such as
-    -   humans tend to give positive interpretation; we assume that the feature we would find important is the one that was used (confirmation bias)
+    -   Even when authors explicitly state the definition they are referring to, this is still an issue.
+
+    -   To illustrate, for the rest of this presentation when I talk about a sandwich, I am referring to a hotdog.
+-   Similarly, the general purpose of XAI is to help human users better understand non human features. Many limitations have occurred from not considering the human element. Such as
+    -   humans tend to give positive interpretation; we assume that the feature we would find important is the one that was used (confirmation bias).
+
+::: notes
+human focused
+:::
 
 ------------------------------------------------------------------------
 
-## XAI Challenges III: User Studies
+## XAI Challenges III
 
 -   Despite the attention that XAI has received, there still remains a signifcant limitation in the literature; user studies.
     -   @adadi2018peeking reported that only 5% of XAI publications are user studies.
 
     -   While this is low, it has been estimated to be closer to 1% [@keane2019case], with many of the available user studies on XAI not reporting statistical analysis.
--   maybe mention that this might be because it is a hard problem?
--   this is where challenge of subjective vs objective measures in user studies can go?
+-   User studies for this task are not an easy problem.
+    -   A simplified task is required [@lipton2018mythos].
+    -   Does subjective understanding of a model reflect a participants true understanding?
+
+::: notes
+User Studies
+:::
 
 ------------------------------------------------------------------------
 
@@ -250,9 +261,10 @@ Images were resizes from 1024 x 1024 to 256 x 256, cropping and architecture?
 
 ### Experiment Conditions
 
--   The user was provided with an **input image**, the **predicted person**, and an explanation from two difference models, asking the user to select which XAI they find to be more reasonable.
--   Every participant will experience the condition made up of the Light and Dark undersampled groups, with the second condition they experience being randomly assigned.
--   The order of the trials within a block is randomised, and the position of the model is counterbalanced, e.g. for the model that everybody experiences, half will see the Dark Undersampled model as `Model 1`, any the other half will see it as `Model 2`. Likewise, the order of the blocks is counterbalanced, e.g. which condition they experience first.
+-   The user was provided with an **input image**, the **predicted person**, and an explanation from two difference models, asking the user to select which XAI they found to be more reasonable.
+-   Each participant experienced the condition made up of the undersampled groups, with the second condition experienced being randomly assigned.
+-   The order of the trials within a block was randomised, and the position of the model was counterbalanced.
+-   Likewise, the order of the blocks was counterbalanced.
 
 ```{r}
 exp_cond <- data.frame(
@@ -276,13 +288,21 @@ exp_cond |>
     )
 ```
 
+::: notes
+e.g. for the model that everybody experiences, half will see the Dark Undersampled model as **Model 1**, any the other half will see it as **Model 2**\
+e.g. which condition they experience first
+:::
+
 ------------------------------------------------------------------------
 
-### Participant Info
+### Participant Info {.scrollable}
 
--   Made the study available to participants from either Australia, United States, or United Kingdom.
--   Prior running the experiment, a pilot study of 10 participants was used.
--   The sample size for the experiment was 40, broken down from the following countries:
+-   Sample size: Experiment (n = 40) \| Pilot (n = 10)
+-   Requirements included
+    -   at least 18 years old age;
+    -   being from either Australia, United States, or United Kingdom;
+    -   fluent in English.
+-   The breakdown of countries for the experiment consisted of:
     -   Australia 7
     -   United Kingdom 23
     -   United States 10
@@ -360,11 +380,11 @@ Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 
 
 ## Strengths/Weakness of Study
 
-- rename this title
+-   rename this title
 
----
+------------------------------------------------------------------------
 
-## Unexpected or Interesting Observations?
+## Evaluating the Results
 
 -   hi
 
