@@ -385,16 +385,24 @@ Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 
 Participant Evaluation
 :::
 
+## Comparison With Literature
+
+- @shen2020useful found that XAI may help users recognise features, but is limited by humans ability to understand the explanation.
+- @alqaraawi2020evaluating too found there was an improvement in a users ability to recognise features, but the impact was quite limited.
 
 ------------------------------------------------------------------------
 
 ## Conclusion
 
--   main points
--   strengths and weakness of study
--   contributions/signifcance of study
--   future research directions
--   visualise sandwich, then ask what sauce they saw on their hotdog?
+-   Post-hoc visualisations are one part of XAI. 
+-   Transparency (e.g. methods) side of XAI is potentially more important, yet gets often neglected.
+-   A key element in XAI is the human user. 
+-   Visualsing example.
+
+::: notes
+Future research?  
+Ask audience to visualise a sandwich, then ask them if it was a hotdog? Use this as an example of why we need a consensus on terminology. 
+:::
 
 ------------------------------------------------------------------------
 
