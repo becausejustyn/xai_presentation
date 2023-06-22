@@ -1,0 +1,150 @@
+---
+title: "pres-outline"
+format: html
+editor: visual
+---
+
+```{r}
+
+current_times <- c(30, 30, 30, 30, 30, 30, 30, 30, 60)
+transform(
+  data.frame(
+    section = rep(c('Intro', 'Methodology', 'Discussion', 'Conclusion'), times = c(3, 3, 2, 1)),
+    subsection = c('Framing the Problem', 'What is XAI?', 'Challenges', 'Study Overview/Data Collection', 'Study Tasks', 'Participants', 'Findings', 'Results Discussion', 'Conclusion'),
+    time_seconds = current_times, running_total_minutes = cumsum(current_times / 60)
+  ))
+
+data.frame(
+  section = c('Intro', 'Methodology', 'Discussion', 'Conclusion'),
+  ideal_range = c('2 - 3', '2 - 3', '3 - 4', '1 - 2'),
+  running_time_low = cumsum(c(2, 2, 3, 1)), 
+  running_time_high = cumsum(c(3, 3, 4, 2))
+)
+
+library(gt)
+
+
+model_desc <- data.frame(
+  Model = c('Fair', 'Dark Undersampled', 'Light Undersampled'),
+  Description = c(
+    'Entire dataset after removing misc skin tones and vacant yaw labels.', 
+    'The dark skin tones will only be from examples where the yaw direction has the middle label, the lighter skin tones will have both yaw direction labels.', 
+    'The light skin tones will only be from examples where the yaw direction has the middle label, the dark skin tones will have both yaw direction labels.'),
+  `IV Level` = c('Fair', 'Biased', 'Biased')
+)
+
+model_desc |>
+  gt() |>
+  tab_footnote(footnote = 'Indepdent Variable', locations = cells_column_labels(columns = IV.Level)) |>
+  cols_label(IV.Level = 'IV Level') |>
+  tab_header(title = 'Description of each model trained') 
+  
+
+```
+
+## To do list
+
+- name the sections correctly, e.g. introduction
+- possibly cover the challenge of objective vs subjective measures in user studies
+- can frame the conclusion earlier on, so by the time you get to the conclusion it is almost obvious
+- explain plots and tables
+- explain the explanation
+- talk about ambiguity with definitions/terms
+- Introduce the need for XAI: add relevant questions 
+- Types of XAI I: explain the flowchart, e.g. the differences between post-hoc, transparency, etc.
+   - will probably want to remove the `aside` code below it due to overflow
+- f 
+
+## Introduction
+
+### Introduce the need for XAI
+
+-   Sentence about AI popularity rising 📈, increasing its usage 🚀, thus a higher emphasis on needing to understand how it works
+-   Particularly, we want to address
+    -   how do we know we can trust AI?
+    -   how do we know if the model is doing what we want?
+    -   how can we evaluate if the model is fair?
+
+---
+
+### What is XAI?
+
+-   To address this, eXplainable Artificial Intelligence (XAI) has become a key research focus.
+-   The general idea is that XAI should ideally help humans understand or see into the blackbox of AI
+-   While it may sound simple there are many key challenges with XAI
+    -   what is an explanation?
+    -   is XAI helpful?
+    -   how do we know we can trust XAI?
+    -   its name by definition is vague and creates confusion
+    -   what type of XAI is best?
+
+---
+
+### Types of XAI
+
+```{mermaid}
+%%| fig-height: 6
+flowchart LR
+    A(XAI Methods)
+    B(Post-hoc Explanations)
+    C(Transparency)
+    C1(Algorithmic Transparency)
+    C2(Decomposability)
+    C3(Simulatability)
+    A1(Backpropagation-based)
+    A2(Perturbation-based)
+    A3A(Global)
+    A3B(Local)
+
+    A --> B & C
+    C --> C1 & C2 & C3
+    B --> A3A & A3B
+    subgraph We are here
+    A3B --> A1 & A2
+    end
+```
+
+---
+
+### XAI Challenges and Limitations
+
+---
+
+### Other research/literature that is relevant?
+
+## Methodology
+
+### overview/design of study
+
+---
+
+### participant info
+
+---
+
+### tasks and materials
+
+- Processing of Data (how labels/models were created)
+- Training the model (mention it was pretrained)
+- User study experiment, e.g. task, conditions
+- how we are evaluating it?
+- specific techniques used? e.g. LRP?
+
+## Results/Discussion
+
+### Selected model
+
+---
+
+### Posthoc?
+### insights and trends
+### interpret these results
+### strengths and weaknesses of your study
+### unexpected or interesting observations
+
+## Conclusion
+
+### main points
+### contributions/signifcance of study
+### future research directions?
+
