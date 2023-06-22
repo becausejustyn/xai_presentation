@@ -5,7 +5,7 @@ suppress-bibliography: false
 editor: visual
 format:
   revealjs:
-    theme: simple # sky simple beige blood if I change the mermaid line colour
+    theme: simple # sky simple beige 
     bibliography: references.bib
     smaller: true
     scrollable: true
@@ -327,9 +327,6 @@ part_demo |>
 
 ### Example Trial
 
--   explain how XAI works using the example image as an example
--   explain the task
-
 ![Example Trial](images/xai_study_example.png){width="99%"}
 
 ::: notes
@@ -378,31 +375,9 @@ Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 
 
 ------------------------------------------------------------------------
 
-## Strengths/Weakness of Study
+## User Evaluation of XAI
 
--   rename this title
-
-------------------------------------------------------------------------
-
-## Evaluating the Results
-
--   hi
-
-------------------------------------------------------------------------
-
-## Conclusion
-
--   main points
--   contributions/signifcance of study
--   future research directions
--   visualise sandwich, then ask what sauce they saw on their hotdog?
-
----
- 
-## Temp II
-
-::: {#fig-elephants layout-ncol=2}
-
+::: {#fig-elephants layout-ncol="2"}
 ![XAI Help User Understanding](images/xai_help_und1.png){#fig-surus}
 
 ![User Confidence in XAI](images/xai_conf1.png){#fig-hanno}
@@ -410,6 +385,17 @@ Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 
 Participant Evaluation
 :::
 
----
+
+------------------------------------------------------------------------
+
+## Conclusion
+
+-   main points
+-   strengths and weakness of study
+-   contributions/signifcance of study
+-   future research directions
+-   visualise sandwich, then ask what sauce they saw on their hotdog?
+
+------------------------------------------------------------------------
 
 ## References
