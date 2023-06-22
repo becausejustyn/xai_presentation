@@ -397,6 +397,19 @@ Dark undersampled was selected most, yet confidence of 1 and 2 were higher, and 
 -   future research directions
 -   visualise sandwich, then ask what sauce they saw on their hotdog?
 
-------------------------------------------------------------------------
+---
+ 
+## Temp II
+
+::: {#fig-elephants layout-ncol=2}
+
+![XAI Help User Understanding](images/xai_help_und1.png){#fig-surus}
+
+![User Confidence in XAI](images/xai_conf1.png){#fig-hanno}
+
+Participant Evaluation
+:::
+
+---
 
 ## References
