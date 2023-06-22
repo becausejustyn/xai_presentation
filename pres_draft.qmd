@@ -29,6 +29,11 @@ To do list
    - Occlusion or perturbation-based: Methods like SHAP and LIME [@ribeiro2016should] cover a small area of the image with a black or grey square, then calculate the impact this has on the model prediction.
    - Saliency maps: Highlight the area of the input that is most relevant for the model output.
 - sort through the challenges 
+- Processing of Data (how labels/models were created)
+- Training the model (mention it was pretrained)
+- User study experiment, e.g. task, conditions
+- how we are evaluating it?
+- specific techniques used? e.g. LRP?
 
 ---
 
@@ -92,8 +97,6 @@ local: single prediction; Are predictions being made for the right reasons
 
 ---
 
-### XAI Literature (maybe bonus)
-
 ### XAI Challenges I
 
 - A key challenge is that terms such as interpretable, explainable, transparent, etc. have no consensus. Specifically, some authors will use these terms interchangeably [@molnar2022; @lipton2018mythos], where other authors will use different meanings for these [@Rudin2018StopEB]. 
@@ -139,6 +142,15 @@ local: single prediction; Are predictions being made for the right reasons
 ::: aside
 this might go earlier? or adjust before when you show some XAI questions
 :::
+
+---
+
+### XAI Challenges V: User Studies
+
+- Despite the attention that XAI has received, there still remains a signifcant limitation in the literature: user studies. 
+- [-@adadi2018peeking] reported that only 5% of XAI publications are user studies.
+- While this is low, it has been estimated to be closer to 1% [@keane2019case], with many of the available user studies on XAI not reporting statistical analysis.
+- maybe mention that this might be because it is a hard problem?
 
 ---
 
@@ -315,3 +327,5 @@ selected_model |>
 ---
 
 ## Conclusion
+
+### visualise sandwich, then ask what sauce they saw on their hotdog? 
